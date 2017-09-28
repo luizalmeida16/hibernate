@@ -1,10 +1,11 @@
 package com.luizalmeida.bankProject;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.io.IOException;
+import java.net.URI;
 
-import com.luizalmeida.bankProject.model.Account;
+import org.glassfish.grizzly.http.server.HttpServer;
+import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.server.ResourceConfig;
 
 /**
  * Hello world!
@@ -12,23 +13,13 @@ import com.luizalmeida.bankProject.model.Account;
  */
 public class App 
 {
-    public static void main( String[] args )
+    public static void main( String[] args ) throws IOException
     {
-        System.out.println( "Hello World!" );
-        
-        Account account = new Account();
-        
-        account.setNumber(1010);
-        account.setBalance(1000.00);
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("bankProject");
-        EntityManager em = emf.createEntityManager();
-        
-        em.getTransaction().begin();
-        em.persist(account);
-        em.getTransaction().commit();
-        
-        em.close();
-        emf.close();
+    	ResourceConfig config = new ResourceConfig().packages("com.luizalmeida.bankProject");
+        URI uri = URI.create("http://localhost:8080");
+        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
+        System.out.println("Server running at port 8080");
+        System.in.read();
+        server.shutdownNow();
     }
 }
