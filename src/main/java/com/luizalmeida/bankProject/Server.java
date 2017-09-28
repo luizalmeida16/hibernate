@@ -11,15 +11,22 @@ import org.glassfish.jersey.server.ResourceConfig;
  * Hello world!
  *
  */
-public class App 
+public class Server 
 {
     public static void main( String[] args ) throws IOException
     {
-    	ResourceConfig config = new ResourceConfig().packages("com.luizalmeida.bankProject");
-        URI uri = URI.create("http://localhost:8080");
-        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
-        System.out.println("Server running at port 8080");
-        System.in.read();
-        server.shutdownNow();
+        //System.in.read();
+        //server.shutdownNow();
+    	Server.startServer("http://localhost:8080");
     }
+    
+    public static HttpServer startServer(String url) {
+    	ResourceConfig config = new ResourceConfig().packages("com.luizalmeida.bankProject");
+        URI uri = URI.create(url);
+        HttpServer server = GrizzlyHttpServerFactory.createHttpServer(uri, config);
+        System.out.println("Server running at: " + url);
+        
+        return server;
+    }
+    
 }
