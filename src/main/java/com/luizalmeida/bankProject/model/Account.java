@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 public class Account {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	@GeneratedValue
+	private Long id;
 	private Integer number;
 	private Double balance;
 	

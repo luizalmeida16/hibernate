@@ -12,7 +12,7 @@ public class AccountDAO {
 		this.em = new JPAUtil().getEntityManager();
 	}
 
-	public void create(Integer number, Double balance){
+	public Account create(Integer number, Double balance){
 		Account account = new Account();
 		
 		account.setBalance(balance);
@@ -21,15 +21,29 @@ public class AccountDAO {
         em.persist(account);
         em.getTransaction().commit();
         em.close();
+        
+        return account;
 	}
 	
-	public Account get(Integer id){
+	public Account get(Long id){
 		em.getTransaction().begin();
 		Account account = em.find(Account.class, id);
 		em.getTransaction().commit();
         em.close();
         
 		return account;
+	}
+	
+	public String delete(Long id) {
+		em.getTransaction().begin();
+		Account account = em.find(Account.class, id);
+		em.remove(account);
+		
+		em.getTransaction().commit();
+        em.close();
+        String status = "deleted";
+        
+		return status;
 	}
 
 }

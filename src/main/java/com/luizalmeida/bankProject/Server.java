@@ -15,9 +15,9 @@ public class Server
 {
     public static void main( String[] args ) throws IOException
     {
-        //System.in.read();
-        //server.shutdownNow();
-    	Server.startServer("http://localhost:8080");
+//        System.in.read();
+//        server.shutdownNow();
+    		Server.startServer("http://localhost:8080");
     }
     
     public static HttpServer startServer(String url) {
