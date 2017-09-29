@@ -16,7 +16,9 @@ public class Account {
 	private Integer number;
 	private Double balance;
 	
-	
+	public Long getId(){
+		return this.id;
+	}
 	public Integer getNumber() {
 		return number;
 	}
